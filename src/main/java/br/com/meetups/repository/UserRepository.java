@@ -18,7 +18,20 @@ public class UserRepository {
         return webClient.get()
                 .uri(ID_PATH, "5e93d1c83000001f5a156c48")
                 .retrieve()
-                .bodyToMono(User.class);
+                .bodyToMono(User.class)
+                .doOnSuccess(user -> log.info(user.toString()));
+    }
+
+    public Mono<User> findUserEmpty() {
+        webClient.get()
+                .uri(ID_PATH, "5e93d1c83000001f5a156c48")
+                .retrieve()
+                .bodyToMono(User.class)
+                .doOnSuccess(user -> log.info(user.toString()))
+                .subscribe();
+
+        log.info("retornando");
+        return Mono.empty();
     }
 
     public Flux<User> findAllUsers() {

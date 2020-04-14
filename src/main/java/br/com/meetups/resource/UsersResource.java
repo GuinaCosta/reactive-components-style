@@ -22,7 +22,7 @@ public class UsersResource {
     }
 
     @GetMapping("/{id}")
-    public Mono<User> getAllUsers(String id) {
+    public Mono<User> getUser(String id) {
         return Mono.from(userRepository.findUser());
     }
 
